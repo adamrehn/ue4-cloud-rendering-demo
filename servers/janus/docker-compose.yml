@@ -1,0 +1,21 @@
+version: "2.3"
+services:
+  
+  demo:
+    build: ../../project
+    image: ue4-cloud-rendering-demo/demo-project:latest
+    network_mode: "host"
+    runtime: nvidia
+    depends_on:
+      - webrtc
+      - webserver
+  
+  webserver:
+    build: ./dockerfiles/webserver
+    image: ue4-cloud-rendering-demo/webserver-janus:latest
+    network_mode: "host"
+  
+  webrtc:
+    build: ./dockerfiles/janus
+    image: ue4-cloud-rendering-demo/janus:latest
+    network_mode: "host"

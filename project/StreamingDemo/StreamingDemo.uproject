@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{068B1D04-3207-0B02-002B-002404B5B222}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "StreamingDemo",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
