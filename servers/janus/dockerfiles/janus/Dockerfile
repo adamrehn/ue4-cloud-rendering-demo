@@ -44,6 +44,7 @@ COPY config /tmp/config
 
 # Expose our TCP and UDP ports
 EXPOSE 5000/udp
+EXPOSE 5001/udp
 EXPOSE 8088
 EXPOSE 8089
 EXPOSE 8889

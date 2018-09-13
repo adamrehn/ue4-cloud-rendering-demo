@@ -7,6 +7,7 @@ The code in this repository demonstrates performing cloud rendering using the NV
 
 - [Prerequisites](#prerequisites)
 - [Running the demo](#running-the-demo)
+- [Enabling audio output (experimental)](#enabling-audio-output-experimental)
 - [Frequently Asked Questions](#frequently-asked-questions)
 - [Legal](#legal)
 
@@ -48,9 +49,43 @@ The code in this repository demonstrates performing cloud rendering using the NV
 
 - Open the URL <http://127.0.0.1:8000/> in a web browser with VP8 support such as Mozilla Firefox or Google Chrome. The exact details of the page that loads will depend on which WebRTC server is being used:
   
-  - When using Janus, you will see a copy of the [Janus Streaming plugin demo page](https://janus.conf.meetecho.com/streamingtest.html). Press the "Start" button to bring up the list of available streams, and select **"VP8 live stream from UE4 and FFmpeg"** from the dropdown list. Finally, press the "Watch or Listen" button to activate the WebRTC stream. Once it is active, you should see the live video output from the UE4 demo project displayed.
+  - When using Janus, you will see a copy of the [Janus Streaming plugin demo page](https://janus.conf.meetecho.com/streamingtest.html). Press the "Start" button to bring up the list of available streams, and select **"VP8/Opus live stream from UE4 and FFmpeg"** from the dropdown list. Finally, press the "Watch or Listen" button to activate the WebRTC stream. Once it is active, you should see the live video output from the UE4 demo project displayed.
   
   - *(Kurento and GStreamer native WebRTC examples will be added soon.)*
+
+
+## Enabling audio output (experimental)
+
+In order to enable audio support, the NVIDIA Docker container running UE4 needs to be given access to the audio devices from the host system. However, when UE4 is accessing host audio devices from inside a container, it has a nasty habit of attempting to lock them for exclusive access. This means that if other applications are already accessing the sound card then UE4 will be unable to open it for output, and vice versa. This is not an issue when the containers are running on a separate server to the client web browser, but the demo is limited to localhost only, which means a workaround is neccesary.
+
+To enable audio output, perform the following steps:
+
+- Create an ALSA loopback device by executing the command `sudo modprobe snd_aloop`. This provides a virtual audio device that UE4 can be instructed to use instead of the host's real audio output device. (This is actually the same solution used to provide an audio device when running the containers in a cloud VM that has no real audio output devices.)
+
+- Uncomment the audio-related lines from the `docker-compose.yml` file for the WebRTC server being used:
+  
+  - For Janus, uncomment the lines in the file [servers/janus/docker-compose.yml](./servers/janus/docker-compose.yml).
+  
+  - *(Kurento and GStreamer native WebRTC examples will be added soon.)*
+
+- Run the demo as per the instructions in the section above. This time, the log output should look like this:
+  
+  ```
+  Received Control Block:
+  
+  videoFormat = Packed BGRA 8:8:8:8
+  width = 640
+  height = 360
+  bytesPerPixel = 4
+  frameRate = 30
+  audioFormat = PCM 32-bit floating-point little-endian
+  channels = 6
+  sampleRate = 48000
+  samplesPerBuffer = 1024
+  bytesPerSample = 4
+  ```
+
+- When the WebRTC stream is played back in the browser, you should hear the Mozart serenade *[Eine kleine Nachtmusik](https://en.wikipedia.org/wiki/Eine_kleine_Nachtmusik)* playing. (The audio file is the Creative Commons licensed [recording from the Wikipedia article](https://en.wikipedia.org/wiki/File:Mozart_-_Eine_kleine_Nachtmusik_-_1._Allegro.ogg).)
 
 
 ## Frequently Asked Questions
@@ -67,3 +102,5 @@ The code in this repository demonstrates performing cloud rendering using the NV
 ## Legal
 
 Copyright &copy; 2018, Adam Rehn. Licensed under the MIT License, see the file [LICENSE](./LICENSE) for details.
+
+The demo project contains a recording of *Eine kleine Nachtmusik* by Wolfgang Amadeus Mozart as performed by the Advent Chamber Orchestra, which is licensed under a [Creative Commons Attribution-Share Alike 2.0 Generic](https://creativecommons.org/licenses/by-sa/2.0/deed.en) license. For more details, see the [file page on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mozart_-_Eine_kleine_Nachtmusik_-_1._Allegro.ogg).
