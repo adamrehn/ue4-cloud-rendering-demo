@@ -1,4 +1,4 @@
-FROM adamrehn/ue4-capture:4.20.2-gpu
+FROM adamrehn/ue4-capture:4.20.2
 
 # Install FFmpeg so we can use the MediaIPC FFmpeg RTP streaming consumer
 USER root
