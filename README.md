@@ -32,8 +32,6 @@ The code in this repository demonstrates performing cloud rendering using the NV
 - Run the appropriate shell script for the WebRTC server you want to use:
   
   - `./run-demo-janus.sh` for the example using the [Janus WebRTC Server](https://janus.conf.meetecho.com/)
-  
-  - *(A Kurento example will be added soon.)*
 
 - Docker will build and run the images for the demo. This may take some time. You will know everything is built and running when you see the following lines in the log output:
   
@@ -51,8 +49,6 @@ The code in this repository demonstrates performing cloud rendering using the NV
 - Open the URL <http://127.0.0.1:8000/> in a web browser with VP8 support such as Mozilla Firefox or Google Chrome. The exact details of the page that loads will depend on which WebRTC server is being used:
   
   - When using Janus, you will see a copy of the [Janus Streaming plugin demo page](https://janus.conf.meetecho.com/streamingtest.html). Press the "Start" button to bring up the list of available streams, and select **"VP8/Opus live stream from UE4 and FFmpeg"** from the dropdown list. Finally, press the "Watch or Listen" button to activate the WebRTC stream. Once it is active, you should see the live video output from the UE4 demo project displayed.
-  
-  - *(A Kurento example will be added soon.)*
 
 
 ## Enabling audio output (experimental)
@@ -66,8 +62,6 @@ To enable audio output, perform the following steps:
 - Uncomment the audio-related lines from the `docker-compose.yml` file for the WebRTC server being used:
   
   - For Janus, uncomment the lines in the file [servers/janus/docker-compose.yml](./servers/janus/docker-compose.yml).
-  
-  - *(A Kurento example will be added soon.)*
 
 - Run the demo as per the instructions in the section above. This time, the log output should look like this:
   
