@@ -23,10 +23,10 @@ The code in this repository demonstrates performing cloud rendering using the NV
 
 ## Running the demo
 
-- Ensure you have built the NVIDIA Docker image `adamrehn/ue4-capture:4.20.2` using the build script from [ue4-docker](https://github.com/adamrehn/ue4-docker). Assuming you have all of the other prerequisites installed correctly, you can build the image using the following command:
+- Ensure you have built the NVIDIA Docker image `adamrehn/ue4-full:4.20.3` using the build script from [ue4-docker](https://github.com/adamrehn/ue4-docker). Assuming you have all of the other prerequisites installed correctly, you can build the image using the following command:
   
   ```
-  python3 build.py 4.20.2 --nvidia
+  python3 build.py 4.20.3
   ```
 
 - Run the appropriate shell script for the WebRTC server you want to use:
