@@ -15,10 +15,11 @@ RUN mkdir /tmp/MediaIPC/build
 WORKDIR /tmp/MediaIPC/build
 RUN cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build .
 
-# Build the demo project
+# Build the demo project and pre-fill the DDC
 COPY --chown=ue4:ue4 StreamingDemo /tmp/StreamingDemo
 WORKDIR /tmp/StreamingDemo
 RUN ue4 build
+RUN ue4 run -run=DerivedDataCache -fill -projectonly
 
 # Setup our entrypoint
 COPY --chown=ue4:ue4 entrypoint.sh /tmp/entrypoint.sh
