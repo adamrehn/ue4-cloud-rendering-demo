@@ -9,13 +9,8 @@ services:
     depends_on:
       - webrtc
       - webserver
-    
-    # Uncomment these lines to enable audio support
-    # (Be sure to have run `sudo modprobe snd_aloop` first)
-    #devices:
-    #  - "/dev/snd"
-    #environment:
-    #  AUDIODEV: "surround51:Loopback"
+    volumes:
+      - "/run/user/${HOST_UID}/pulse:/run/user/1000/pulse"
   
   webserver:
     build: ./dockerfiles/webserver
