@@ -6,14 +6,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg
 USER ue4
 
 # Build the MediaIPC example consumers
-ENV CC=clang-5.0
-ENV CXX=clang++-5.0
 RUN git clone --progress --depth=1 https://github.com/adamrehn/MediaIPC.git /tmp/MediaIPC
 WORKDIR /tmp/MediaIPC/
-RUN conan install .
-RUN mkdir /tmp/MediaIPC/build
-WORKDIR /tmp/MediaIPC/build
-RUN cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build .
+RUN \
+	export CC=`conan profile get env.CC ue4` && \
+	export CXX=`conan profile get env.CXX ue4` && \
+	conan install . && \
+	mkdir /tmp/MediaIPC/build && \
+	cd /tmp/MediaIPC/build && \
+	cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build .
 
 # Build the demo project and pre-fill the DDC
 COPY --chown=ue4:ue4 StreamingDemo /tmp/StreamingDemo
