@@ -1,7 +1,9 @@
 UE4 Cloud Rendering Demo
 ========================
 
-The code in this repository demonstrates performing cloud rendering using the NVIDIA Docker containers built by the [ue4-docker](https://github.com/adamrehn/ue4-docker) Python package and then streaming the results to a web browser via WebRTC. **Note that this code is provided as an example only and is NOT designed for production use.**
+**NOTE: this demo uses the [UE4Capture](https://github.com/adamrehn/UE4Capture) plugin, which was only ever designed as a proof-of-concept prototype. It is strongly recommended that users migrate to [Pixel Streaming for Linux](https://adamrehn.com/articles/pixel-streaming-in-linux-containers/) instead, which provides superior features and performance.**
+
+The code in this repository demonstrates performing cloud rendering using the NVIDIA Docker containers built by the [ue4-docker](https://github.com/adamrehn/ue4-docker) Python package and then streaming the results to a web browser via WebRTC. Note that this code is provided as an example only and is NOT designed for production use.
 
 ## Contents
 
