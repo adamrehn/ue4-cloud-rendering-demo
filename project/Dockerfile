@@ -9,12 +9,12 @@ USER ue4
 RUN git clone --progress --depth=1 https://github.com/adamrehn/MediaIPC.git /tmp/MediaIPC
 WORKDIR /tmp/MediaIPC/
 RUN \
-	export CC=`conan profile get env.CC ue4` && \
-	export CXX=`conan profile get env.CXX ue4` && \
-	conan install . && \
-	mkdir /tmp/MediaIPC/build && \
-	cd /tmp/MediaIPC/build && \
-	cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build .
+	conan install . --profile ue4 && \
+	conan install . --profile ue4 -g=virtualenv && \
+	cat activate.sh >> build.sh && \
+	echo 'mkdir /tmp/MediaIPC/build && cd /tmp/MediaIPC/build && cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build .' >> build.sh && \
+	chmod +x build.sh && \
+	./build.sh
 
 # Build the demo project and pre-fill the DDC
 COPY --chown=ue4:ue4 StreamingDemo /tmp/StreamingDemo
