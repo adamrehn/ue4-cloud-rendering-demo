@@ -1,9 +1,10 @@
-UE4 Cloud Rendering Demo
-========================
+# UE4 Cloud Rendering Demo
 
-**NOTE: this demo uses the [UE4Capture](https://github.com/adamrehn/UE4Capture) plugin, which was only ever designed as a proof-of-concept prototype. It is strongly recommended that users migrate to [Pixel Streaming for Linux](https://adamrehn.com/articles/pixel-streaming-in-linux-containers/) instead, which provides superior features and performance.**
+---
+# [DEPRECATED] Both this demo and the [UE4Capture](https://github.com/adamrehn/UE4Capture) plugin it uses are now obsolete. All developers should migrate to the Unreal Engine's official [Pixel Streaming](https://docs.unrealengine.com/en-US/Platforms/PixelStreaming/index.html) system, which added support for Linux and container-based deployments in Unreal Engine 4.27. The direct equivalent to this cloud rendering demo is the Docker Compose demo for Pixel Streaming in the Unreal Engine source code, located under [Engine/Extras/Containers/Examples/PixelStreaming](https://github.com/EpicGames/UnrealEngine/tree/4.27.2-release/Engine/Extras/Containers/Examples/PixelStreaming) *(note that you will need to download the Unreal Engine source code and run `Setup.sh` to see all of the relevant files.)* Please direct all support queries regarding Pixel Streaming to Epic Games through their official communication channels.
+---
 
-The code in this repository demonstrates performing cloud rendering using the NVIDIA Docker containers built by the [ue4-docker](https://github.com/adamrehn/ue4-docker) Python package and then streaming the results to a web browser via WebRTC. Note that this code is provided as an example only and is NOT designed for production use.
+The code in this repository demonstrates performing cloud rendering using the NVIDIA Docker containers built by the [ue4-docker](https://github.com/adamrehn/ue4-docker) Python package and then streaming the results to a web browser via WebRTC. Note that the demo uses the [UE4Capture](https://github.com/adamrehn/UE4Capture) plugin, which was only ever designed as a proof-of-concept prototype and is not recommended for production use. Developers should instead upgrade to Unreal Engine 4.27 or newer and use the official Pixel Streaming system, which provides superior features and performance.
 
 ## Contents
 
